@@ -1,4 +1,6 @@
-﻿using Marmot.Topic;
+﻿using Marmot.Direct;
+using Marmot.Fanout;
+using Marmot.Topic;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,14 @@ namespace Marmot
             services.AddSingleton<IConnectionChannelPool, ConnectionChannelPool>();
             services.AddSingleton<ITopicConsumerClientFactory, TopicConsumerClientFactory>();
             services.AddSingleton<IPublishMessageSender, PublishMessageSender>();
+            
+            services.AddSingleton<IFSubscribe, FSubscribe>();
+            services.AddSingleton<IFPublish, FPublish>();
+            services.AddSingleton<IFConsumerClientFactory, FConsumerClientFactory>();
+
+            services.AddSingleton<IDReceiver, DReceiver>();
+            services.AddSingleton<IDPublish, DPublish>();
+            services.AddSingleton<IDConsumerClientFactory, DConsumerClientFactory>();
 
             return services;
         }

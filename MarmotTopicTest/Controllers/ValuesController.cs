@@ -32,7 +32,7 @@ namespace MarmotTopicTest.Controllers
                 Console.WriteLine();
                 topicConsumer.Commit();
             };
-            topicConsumer.SubScribe(new[] { "aaa", "ljh-publish","FF#" });
+            topicConsumer.SubScribe(new[] { "aaa", "ljh-publish", "FF.#" });
             topicConsumer.Listening(new TimeSpan() , new System.Threading.CancellationToken());
 
         }
@@ -57,9 +57,9 @@ namespace MarmotTopicTest.Controllers
 
             publishMessageSender.PublishAsync(new Person()
             {
-                Id = "0",
-                Name = "xiaoming"
-            }, "MarmotExchange", "topic", "FF234", true, false, null);
+                Id = "1",
+                Name = "xiaoming1"
+            }, "MarmotExchange", "topic", "FF.933", true, false, null);
 
 
             return Ok("ok");
