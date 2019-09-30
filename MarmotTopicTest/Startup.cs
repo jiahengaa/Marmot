@@ -30,7 +30,7 @@ namespace MarmotTopicTest
         {
             services.UseMarmotMQ(opt =>
             {
-                opt.HostName = "10.1.30.251";
+                opt.HostName = "127.0.0.1";
                 opt.Port = 5672;
                 opt.UserName = "admin";
                 opt.Password = "admin";

@@ -3,7 +3,24 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <ApplicationIcon>marmot.ico</ApplicationIcon>
+    <Description>Marmot is a multi-threaded connection pooling secure for RabbitMQ client that supports Fanout, Direct, and Topic modes.</Description>
+    <PackageProjectUrl>https://github.com/jiahengaa/Marmot</PackageProjectUrl>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <RepositoryType>github public</RepositoryType>
+    <RepositoryUrl>https://github.com/jiahengaa/Marmot</RepositoryUrl>
+    <PackageIconUrl>https://github.com/jiahengaa/Marmot/blob/master/Marmot/marmot.ico</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="license.txt" />
+    <None Remove="license.txt" />
+    <None Include="license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />

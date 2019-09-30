@@ -24,23 +24,27 @@ namespace MarmotTopicTest.Controllers
         [HttpGet]
         public void Get()
         {
-            var fanoutConsumer = fConsumerClientFactory.Create();
-
-            fanoutConsumer.ConsumerReceived += (sender, e) =>
+            Task.Factory.StartNew(() =>
             {
-                Console.WriteLine($"RoutingKey:{e.RoutingKey},Body:{ Encoding.UTF8.GetString(e.Body)}");
-                Console.WriteLine();
-            };
 
-            fanoutConsumer.SubScribe();
-            fanoutConsumer.Listening(new TimeSpan(), new System.Threading.CancellationToken());
+                var fanoutConsumer = fConsumerClientFactory.Create("MarmotFanoutSample");
+
+                fanoutConsumer.ConsumerReceived += (sender, e) =>
+                {
+                    Console.WriteLine($"RoutingKey:{e.RoutingKey},Body:{ Encoding.UTF8.GetString(e.Body)}");
+                    Console.WriteLine();
+                };
+
+                fanoutConsumer.SubScribe();
+                fanoutConsumer.Listening(new TimeSpan(), new System.Threading.CancellationToken());
+            });
         }
 
         // GET: api/Fanout/5
         [HttpGet("{id}", Name = "Get")]
         public async Task<bool> Get(int id)
         {
-            return await fPublish.PublishAsync(3333, "MarmotExchangeFanout");
+            return await fPublish.PublishAsync(3333, "MarmotFanoutSample");
         }
 
         // POST: api/Fanout
