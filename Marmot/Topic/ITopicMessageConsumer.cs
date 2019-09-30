@@ -4,21 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Marmot.Topic
 {
+    /// <summary>
+    /// Topic Consumer Instance
+    /// </summary>
     public interface ITopicMessageConsumer : IDisposable
     {
-        Action<object, ConsumerEventArgs> ConsumerCancelled { set; get; }
-        Action<object, ConsumerEventArgs> ConsumerUnregistered { set; get; }
-        Action<object, ConsumerEventArgs> ConsumerRegistered { set; get; }
-        Action<object, ShutdownEventArgs> ConsumerShutdown { set; get; }
-        Action<object, BasicDeliverEventArgs> ConsumerReceived { set; get; }
-        void SubScribe(IEnumerable<string> topics);
-
-        void Listening(TimeSpan timeout, CancellationToken cancellationToken);
-
-        void Commit();
-        void Reject();
+        /// <summary>
+        /// Start listen
+        /// </summary>
+        /// <param name="topics"></param>
+        /// <param name="timeout"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="autoAck"></param>
+        /// <returns></returns>
+        Task StartListen(IEnumerable<string> topics, TimeSpan timeout, CancellationToken cancellationToken, bool autoAck = false);
     }
 }

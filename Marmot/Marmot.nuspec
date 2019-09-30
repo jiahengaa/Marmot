@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Marmot</id>
-    <version>1.2</version>
+    <version>1.4</version>
     <title>Marmot</title>
     <authors>jiaheng liu</authors>
     <owners>jiaheng liu</owners>
@@ -11,7 +11,7 @@
     <iconUrl>https://github.com/jiahengaa/Marmot/blob/master/Marmot/marmot.ico</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Marmot is a multi-threaded connection pooling secure for RabbitMQ client that supports Fanout, Direct, and Topic modes.</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Provide asynchronous interface, optimize API.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>RabbitMQ Connetion Pool ThreadSafe</tags>
     <dependencies>

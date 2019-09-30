@@ -25,18 +25,15 @@ namespace MarmotTopicTest.Controllers
         [Route("subscribe")]
         public void Get()
         {
-            var directConsumer = dConsumerClientFactory.Create("MarmotExchangeDirect");//未自定义direct的消费者的queue名称时，自动创建的队列不会持久化消息
+            var directConsumer = dConsumerClientFactory.Create("MarmotExchangeDirect","",
+                (sender, e,channel) =>
+                {
+                    var body = e.Body;
+                    var message = Encoding.UTF8.GetString(body);
+                    var routingKey = e.RoutingKey;
+                    Console.WriteLine(" [x] Received '{0}':'{1}'", routingKey, message);
+                }).StartListen(new[] { "aaa", "bbb", "cc" }, new TimeSpan(), new System.Threading.CancellationToken());//未自定义direct的消费者的queue名称时，自动创建的队列不会持久化消息
 
-            directConsumer.ConsumerReceived += (sender, e) =>
-            {
-                var body = e.Body;
-                var message = Encoding.UTF8.GetString(body);
-                var routingKey = e.RoutingKey;
-                Console.WriteLine(" [x] Received '{0}':'{1}'", routingKey, message);
-            };
-
-            directConsumer.SubScribe(new[] { "aaa", "bbb", "cc" });
-            directConsumer.Listening(new TimeSpan(), new System.Threading.CancellationToken());
         }
 
         // GET: api/Direct/5

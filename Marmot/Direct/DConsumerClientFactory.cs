@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +19,14 @@ namespace Marmot.Direct
             this.connectionChannelPool = connectionChannelPool;
         }
 
-        public IDReceiver Create(string exchangeName = "MarmotExchangeDirect",string queueName = "",bool durable = true,bool exclusive = false, bool autoDelete = false)
+        public IDReceiver Create(string exchangeName = "MarmotExchangeDirect",
+             string queueName = "", 
+             Action<object, BasicDeliverEventArgs,IModel> consumerReceived = null,
+             Action<object, ConsumerEventArgs, IModel> consumerRegistered = null,
+             Action<object, ConsumerEventArgs, IModel> consumerUnregistered = null,
+             Action<object, ConsumerEventArgs, IModel> consumerCancelled = null,
+             Action<object, ShutdownEventArgs, IModel> consumerShutdown = null,
+             bool durable = true,bool exclusive = false, bool autoDelete = false)
         {
             return new DReceiver(
                 exchangeName,
@@ -26,7 +35,12 @@ namespace Marmot.Direct
                 exclusive,
                 autoDelete,
                 connectionChannelPool,
-                rbOptions);
+                rbOptions,
+                consumerReceived,
+                consumerRegistered,
+                consumerUnregistered,
+                consumerCancelled,
+                consumerShutdown);
         }
     }
 }

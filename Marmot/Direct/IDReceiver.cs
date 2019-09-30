@@ -4,18 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Marmot.Direct
 {
     public interface IDReceiver
     {
-        Action<object, ConsumerEventArgs> ConsumerCancelled { set; get; }
-        Action<object, ConsumerEventArgs> ConsumerUnregistered { set; get; }
-        Action<object, ConsumerEventArgs> ConsumerRegistered { set; get; }
-        Action<object, ShutdownEventArgs> ConsumerShutdown { set; get; }
-        Action<object, BasicDeliverEventArgs> ConsumerReceived { set; get; }
-        string ServersAddress { get; }
-        void SubScribe(IEnumerable<string> routingKeys);
-        void Listening(TimeSpan timeout, CancellationToken cancellationToken);
+        /// <summary>
+        /// Start Listen
+        /// </summary>
+        /// <param name="routingKeys"></param>
+        /// <param name="timeout"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="autoAck"></param>
+        /// <returns></returns>
+        Task StartListen(IEnumerable<string> routingKeys, TimeSpan timeout, CancellationToken cancellationToken, bool autoAck = true);
     }
 }

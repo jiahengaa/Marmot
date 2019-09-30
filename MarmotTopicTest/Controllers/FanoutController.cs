@@ -26,17 +26,12 @@ namespace MarmotTopicTest.Controllers
         {
             Task.Factory.StartNew(() =>
             {
-
-                var fanoutConsumer = fConsumerClientFactory.Create("MarmotFanoutSample");
-
-                fanoutConsumer.ConsumerReceived += (sender, e) =>
-                {
-                    Console.WriteLine($"RoutingKey:{e.RoutingKey},Body:{ Encoding.UTF8.GetString(e.Body)}");
-                    Console.WriteLine();
-                };
-
-                fanoutConsumer.SubScribe();
-                fanoutConsumer.Listening(new TimeSpan(), new System.Threading.CancellationToken());
+                fConsumerClientFactory.Create("MarmotFanoutSample",
+                    (sender, e, channel) =>
+                    {
+                        Console.WriteLine($"RoutingKey:{e.RoutingKey},Body:{ Encoding.UTF8.GetString(e.Body)}");
+                        Console.WriteLine();
+                    }).StartListen(new TimeSpan(), new System.Threading.CancellationToken());
             });
         }
 

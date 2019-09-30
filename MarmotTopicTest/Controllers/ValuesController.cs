@@ -25,16 +25,13 @@ namespace MarmotTopicTest.Controllers
         [HttpGet]
         public void Get(string queueName = "queue1")
         {
-            var topicConsumer =  topicConsumerClientFactory.Create("MarmotExchange", "topic", queueName, true, false, null);
-            topicConsumer.ConsumerReceived = (sender, e) =>
+            topicConsumerClientFactory.Create("MarmotExchange", "topic", queueName, true, false, (sender, e,consumer) =>
             {
                 Console.WriteLine($"Queue:{queueName},RoutingKey:{e.RoutingKey},Body:{ Encoding.UTF8.GetString(e.Body)}");
                 Console.WriteLine();
-                topicConsumer.Commit();
-            };
-            topicConsumer.SubScribe(new[] { "aaa", "ljh-publish", "FF.#" });
-            topicConsumer.Listening(new TimeSpan() , new System.Threading.CancellationToken());
-
+                consumer.BasicAck(e.DeliveryTag, false);
+                //channel.BasicReject(deliveryTag, true);
+            }).StartListen(new[] { "aaa", "ljh-publish", "FF.#" }, new TimeSpan(), new System.Threading.CancellationToken());
         }
 
         // GET api/values/5

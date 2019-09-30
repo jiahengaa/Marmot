@@ -22,7 +22,6 @@ namespace Marmot.Fanout
             this.logger = logger;
         }
 
-        public string ServersAddress => connectionChannelPool.HostAddress;
 
         public Task<bool> PublishAsync<T>(
             T content,

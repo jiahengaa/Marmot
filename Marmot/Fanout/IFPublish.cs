@@ -7,7 +7,6 @@ namespace Marmot.Fanout
 {
     public interface IFPublish
     {
-        string ServersAddress { get; }
         Task<bool> PublishAsync<T>(T content, string exchange= "MarmotExchangeFanout");
     }
 }
