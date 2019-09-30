@@ -31,7 +31,7 @@ namespace MarmotTopicTest.Controllers
                     {
                         Console.WriteLine($"RoutingKey:{e.RoutingKey},Body:{ Encoding.UTF8.GetString(e.Body)}");
                         Console.WriteLine();
-                    }).StartListen(new TimeSpan(), new System.Threading.CancellationToken());
+                    }).StartListen(new TimeSpan(30000), new System.Threading.CancellationToken());
             });
         }
 

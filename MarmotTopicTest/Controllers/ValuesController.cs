@@ -31,7 +31,7 @@ namespace MarmotTopicTest.Controllers
                 Console.WriteLine();
                 consumer.BasicAck(e.DeliveryTag, false);
                 //channel.BasicReject(deliveryTag, true);
-            }).StartListen(new[] { "aaa", "ljh-publish", "FF.#" }, new TimeSpan(), new System.Threading.CancellationToken());
+            }).StartListen(new[] { "aaa", "ljh-publish", "FF.#" }, new TimeSpan(30000), new System.Threading.CancellationToken());
         }
 
         // GET api/values/5

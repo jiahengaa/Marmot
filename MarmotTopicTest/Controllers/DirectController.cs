@@ -32,7 +32,7 @@ namespace MarmotTopicTest.Controllers
                     var message = Encoding.UTF8.GetString(body);
                     var routingKey = e.RoutingKey;
                     Console.WriteLine(" [x] Received '{0}':'{1}'", routingKey, message);
-                }).StartListen(new[] { "aaa", "bbb", "cc" }, new TimeSpan(), new System.Threading.CancellationToken());//未自定义direct的消费者的queue名称时，自动创建的队列不会持久化消息
+                }).StartListen(new[] { "aaa", "bbb", "cc" }, new TimeSpan(30000), new System.Threading.CancellationToken());//未自定义direct的消费者的queue名称时，自动创建的队列不会持久化消息
 
         }
 

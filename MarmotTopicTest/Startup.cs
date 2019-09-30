@@ -34,7 +34,7 @@ namespace MarmotTopicTest
                 opt.Port = 5672;
                 opt.UserName = "admin";
                 opt.Password = "admin";
-                opt.VirtualHost = "/";
+                opt.VirtualHost = "marmot";
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerCustom(Configuration, "MarmotTopicTest", "v1", UseValidateForSwagger, "MarmotTopicTest");
