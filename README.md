@@ -7,6 +7,12 @@ Marmot is a multi-threaded connection pooling secure for RabbitMQ client that su
 - When Fanout and Direct,default autoAck is true
 
 # How To Use
+``` sh
+Install-Package Marmot -Version 1.4.0
+or
+dotnet add package Marmot --version 1.4.0
+```
+Nuget address: https://www.nuget.org/packages/Marmot
 
 ## Startup.cs
 ``` C#
