@@ -1,6 +1,7 @@
 # Marmot
 Marmot is a multi-threaded connection pooling secure for RabbitMQ client that supports Fanout, Direct, and Topic modes.Support DI.
-![icon](./Marmot/marmot.png)
+
+   ![icon](./Marmot/marmot.png)
 # You should Know
 - The encoding format of transmission is UTF-8.
 - When Fanout and Direct,default autoAck is true
